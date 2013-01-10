@@ -9,7 +9,7 @@ if len(sys.argv) != 2:
     sys.exit()
 datastore_file = sys.argv[1]
 
-ct = 0
+counter = 0
 p=re.compile("type: \"(.*)\"")
 conn = sqlite3.connect(datastore_file, isolation_level=None)
 cursor = conn.cursor()
@@ -27,9 +27,9 @@ for unused_entity_id, entity in cursor:
             writers[writer_name] = csvwriter
         csvwriter.writerow([f])
 
-        ct += 1
-        if ct % 20000 == 0:
-            print "Ct is %s" % ct
+        counter += 1
+        if counter % 20000 == 0:
+            print "processed elements %s" % counter
             sys.stdout.flush()
 
 print "done"
